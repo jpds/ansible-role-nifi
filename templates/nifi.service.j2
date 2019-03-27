@@ -8,6 +8,7 @@ Type=forking
 PIDFile={{ nifi_pid_file }}
 ExecStart={{ nifi_base_dir }}/nifi-current/bin/nifi.sh start
 ExecStop={{ nifi_base_dir }}/nifi-current/bin/nifi.sh stop
+ExecRestart={{ nifi_base_dir }}/nifi-current/bin/nifi.sh restart
 
 [Install]
 WantedBy=multi-user.target
