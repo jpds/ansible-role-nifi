@@ -9,12 +9,20 @@
   notify:
     - restart nifi
 
-- name: Create nifi systemd service
+- name: Create nifi systemd service | CentOS
   template: src=nifi.service.j2 dest="{{ nifi_service }}" owner=root group=root mode=0644
   notify:
     - reload systemctl
     - restart nifi
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version >= "7"
+  tags: [ service ]
+
+- name: Create nifi systemd service | Ubuntu
+  template: src=nifi.service.j2 dest="{{ nifi_service }}" owner=root group=root mode=0644
+  notify:
+    - reload systemctl
+    - restart nifi
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= "15.04"
   tags: [ service ]
 
 - name: Create nifi init.d service
